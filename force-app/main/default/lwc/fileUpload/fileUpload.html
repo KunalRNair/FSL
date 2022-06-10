@@ -1,0 +1,60 @@
+<template>
+
+    <div>
+        <select onchange={datatab}>
+            <template for:each={opptions} for:item="o">
+                <option value={o.Id} key={o.Id}>
+                    {o.Name}
+                </option>
+            </template>
+        </select>
+    </div>
+
+    <lightning-file-upload label="Attach receipt" name="fileUploader" accept={acceptedFormats} record-id={currId}
+        onuploadfinished={handleUploadFinished} multiple>
+    </lightning-file-upload>
+
+
+    
+
+    <div style="height: 300px;">
+        <lightning-datatable key-field="id" data={data} columns={columns} hide-checkbox-column="true" onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </div>
+    
+    <template if:true={isModalOpen}>
+    
+        <!-- Modal/Popup Box LWC starts here -->
+    
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+    
+            <div class="slds-modal__container">
+    
+                <!-- Modal/Popup Box LWC header here -->
+    
+                <header class="slds-modal__header">
+                    <lightning-input class="to" type="email" label="To:" ></lightning-input>
+                </header>
+    
+                <!-- Modal/Popup Box LWC body starts here -->
+    
+                <div class="slds-modal__content slds-p-around_medium ">
+    
+                    <div class="slds-align_absolute-center">
+    
+                        <button class="slds-button slds-button_neutral" onclick={closeModal} title="Send">Send</button>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </section>
+    
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    
+    </template>
+
+</template>
